@@ -1,0 +1,1 @@
+Django Project that let's a user post Articles (Blogpost) with an html editor and allowes for readers to comment on these articles.
