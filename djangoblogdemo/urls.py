@@ -15,7 +15,11 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
+from blog.views import *
+
 
 urlpatterns = [
+    path('/', BlogView.as_view(), name="landingbage"),
+    path('article/<slug>/', ArticleDetailView.as_view(), name="article-detail"),
     path('admin/', admin.site.urls),
 ]
