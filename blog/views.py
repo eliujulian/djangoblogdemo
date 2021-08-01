@@ -8,7 +8,7 @@ from django.shortcuts import get_object_or_404, reverse
 
 class BlogView(ListView):
     model = Article
-    template_name = "generic/generic_list.html"
+    template_name = "blog/index.html"
 
     def get_context_data(self, *, object_list=None, **kwargs):
         context = super().get_context_data()
@@ -66,12 +66,12 @@ class ArticleCreateView(UserPassesTestMixin, CreateView):
 class ArticleDetailView(UserPassesTestMixin, DetailView):
     model = Article
     slug_field = 'id_slug'
-    template_name = "blog/blog_detail.html"
+    template_name = "blog/article-detail.html"
 
     def get_object(self, queryset=None):
         return get_object_or_404(self.model, id_slug=self.kwargs['slug'])
 
-    def test_func(self):
+    def test_func(self):  # only superuser can see not published articles
         if self.get_object().publish:
             return True
         else:

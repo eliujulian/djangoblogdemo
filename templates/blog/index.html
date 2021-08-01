@@ -1,0 +1,17 @@
+{% extends 'blog/base.html' %}
+
+{% block content %}
+
+    <div class="container">
+        {% for article in object_list %}
+            <div class="card">
+                <div class="card-head">
+                    <a href="{% url 'article-detail' article.id_slug %}">
+                        {{ article }}
+                    </a>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+
+{% endblock %}
