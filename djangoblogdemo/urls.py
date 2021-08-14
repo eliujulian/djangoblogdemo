@@ -19,7 +19,10 @@ from blog.views import *
 
 
 urlpatterns = [
-    path('/', BlogView.as_view(), name="landingbage"),
+    path('/', BlogView.as_view(), name="landingpage"),
+    path('article/create/', ArticleCreateView.as_view(), name="article-create"),
     path('article/<slug>/', ArticleDetailView.as_view(), name="article-detail"),
+    path('article/<slug>/update/', ArticleUpdateView.as_view(), name="article-update"),
+    path('article/<slug>/delete/', ArticleDeleteView.as_view(), name="article-delete"),
     path('admin/', admin.site.urls),
 ]

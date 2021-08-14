@@ -55,7 +55,7 @@ class ArticleCreateView(UserPassesTestMixin, CreateView):
         return initial
 
     def test_func(self):
-        return self.request.user.is_superuser
+        return self.request.user.is_superuser  # Only superuser (== blog owner can create articles)
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data()
@@ -75,7 +75,7 @@ class ArticleDetailView(UserPassesTestMixin, DetailView):
         if self.get_object().publish:
             return True
         else:
-            return self.request.user.is_superuser
+            return self.request.user.is_superuser  # Only superuser can see articles that are not yet published.
 
 
 class ArticleUpdateView(UserPassesTestMixin, UpdateView):
@@ -93,13 +93,13 @@ class ArticleUpdateView(UserPassesTestMixin, UpdateView):
         return get_object_or_404(self.model, id_slug=self.kwargs['slug'])
 
     def test_func(self):
-        return self.request.user.is_superuser
+        return self.request.user.is_superuser  # Only superuser can change articles.
 
 
 class ArticleDeleteView(UserPassesTestMixin, DeleteView):
     model = Article
     slug_field = 'id_slug'
-    template_name = "generic/generic_confirm_delete.html"
+    template_name = "blog/confirm_delete.html"
 
     def get_object(self, queryset=None):
         return get_object_or_404(self.model, id_slug=self.kwargs['slug'])
@@ -129,4 +129,5 @@ class BlogCommentUpdateView(UserPassesTestMixin, UpdateView):
     form_class = BlogCommentForm
 
     def test_func(self):
+        # superuser can change comments for compliance purposes
         return self.request.user.is_superuser
