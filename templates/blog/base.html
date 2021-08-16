@@ -8,6 +8,7 @@
 </head>
 <body>
 
+<!-- Navbar -->
 <nav class="navbar navbar-light bg-light">
   <div class="container-fluid">
     <a class="navbar-brand">The Django Demo Blog</a>
@@ -18,6 +19,7 @@
   </div>
 </nav>
 
+<!-- Content Area -->
 {% block content %} {% endblock content %}
 
 <!-- Footer -->
@@ -27,16 +29,21 @@
             <div class="col">
                 <div><strong>Blog</strong></div>
                 <div><a href="{% url 'landingpage' %}">Home</a></div>
-                <div><strong>Superuser Only</strong></div>
-                <div>#</div>
-                <div>#</div>
-                <div>#</div>
+                 {% if user.is_superuser %}
+                    <div><strong>Superuser Only</strong></div>
+                    <div>all articles</div>
+                    <div>statistics</div>
+                    <div>#</div>
+                {% endif %}
             </div>
             <div class="col">
-                <div><strong>Tags</strong></div>
-                <div><a href="#">Lorem</a></div>
-                <div><a href="#">Ipsum</a></div>
-                <div><a href="#">Te Dum</a></div>
+                <div><strong>Top Tags</strong></div>
+
+                <!-- Todo: generate from db -->
+                <div><a href="#">Lorem (34)</a></div>
+                <div><a href="#">Ipsum (22)</a></div>
+                <div><a href="#">Te Dum (9)</a></div>
+
             </div>
             <div class="col">
                 <div><strong>Official</strong></div>
