@@ -3,8 +3,29 @@
 
 {% block content %}
     <div class="container">
+        <!-- Head -->
         <div class="card">
-            {{ object }}
+            <h3>{{ object.title }}</h3>
+            Published: {{ object.date|date:"d.m.Y" }}
+            Author: The Blog Author  <!-- todo genereate from db -->
         </div>
+
+        <!-- Content -->
+        <div class="card">
+            {{ object.content }}
+        </div>
+        <!-- Comments -->
+
+        {% for comment in object.blogcomment_set.all %}
+            <div class="card">
+                {{ comment }}
+            </div>
+        {% endfor %}
+
+        {% if user.is_superuser %}
+            <!-- Superuser Buttons -->
+
+        {% endif %}
+
     </div>
 {% endblock content %}
