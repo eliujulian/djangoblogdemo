@@ -2,7 +2,7 @@ from django.contrib.auth.mixins import UserPassesTestMixin
 from django.utils import timezone
 from blog.models import Article, BlogComment
 from blog.forms import ArticleForm, BlogCommentForm
-from django.views.generic import ListView, CreateView, DetailView, DeleteView, UpdateView
+from django.views.generic import ListView, CreateView, DetailView, DeleteView, UpdateView, TemplateView
 from django.shortcuts import get_object_or_404, reverse
 
 
@@ -21,7 +21,7 @@ class BlogView(ListView):
 
 class ArticleListView(UserPassesTestMixin, ListView):
     model = Article
-    template_name = "generic/generic_list.html"
+    template_name = "blog/index.html"  # ToDo new template
 
     def get_queryset(self):
         return Article.objects.all()
@@ -131,3 +131,15 @@ class BlogCommentUpdateView(UserPassesTestMixin, UpdateView):
     def test_func(self):
         # superuser can change comments for compliance purposes
         return self.request.user.is_superuser
+
+
+class ImprintView(TemplateView):
+    template_name = 'blog/imprint.html'
+
+
+class PrivacyView(TemplateView):
+    template_name = 'blog/privacy.html'
+
+
+class ContactView(TemplateView):
+    template_name = 'blog/contact.html'

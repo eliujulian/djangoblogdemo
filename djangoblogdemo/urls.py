@@ -20,6 +20,9 @@ from blog.views import *
 
 urlpatterns = [
     path('', BlogView.as_view(), name="landingpage"),
+    path('imprint/', ImprintView.as_view(), name="imprint"),
+    path('contact/', ContactView.as_view(), name="contact"),
+    path('privacy/', PrivacyView.as_view(), name="privacy"),
     path('article/create/', ArticleCreateView.as_view(), name="article-create"),
     path('article/<slug>/', ArticleDetailView.as_view(), name="article-detail"),
     path('article/<slug>/update/', ArticleUpdateView.as_view(), name="article-update"),
