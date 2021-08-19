@@ -31,6 +31,9 @@
                 <div><a href="{% url 'landingpage' %}">Home</a></div>
                  {% if user.is_superuser %}
                     <div><strong>Superuser Only</strong></div>
+                     <div>
+                        <a href="{% url 'article-create' %}">new article</a>
+                     </div>
                     <div>all articles</div>
                     <div>statistics</div>
                     <div>#</div>
