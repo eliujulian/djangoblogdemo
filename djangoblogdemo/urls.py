@@ -27,6 +27,7 @@ urlpatterns = [
     path('imprint/', ImprintView.as_view(), name="imprint"),
     path('contact/', ContactView.as_view(), name="contact"),
     path('privacy/', PrivacyView.as_view(), name="privacy"),
+    path('article/list/', login_required(ArticleListView.as_view()), name="article-list"),
     path('article/create/', login_required(ArticleCreateView.as_view()), name="article-create"),
     path('article/<slug>/', ArticleDetailView.as_view(), name="article-detail"),
     path('article/<slug>/update/', login_required(ArticleUpdateView.as_view()), name="article-update"),
