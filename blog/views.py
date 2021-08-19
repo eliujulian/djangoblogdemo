@@ -21,7 +21,7 @@ class BlogView(ListView):
 
 class ArticleListView(UserPassesTestMixin, ListView):
     model = Article
-    template_name = "blog/index.html"  # ToDo new template
+    template_name = "blog/article_list.html"
 
     def get_queryset(self):
         return Article.objects.all()
