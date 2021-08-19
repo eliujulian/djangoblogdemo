@@ -16,16 +16,19 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 from blog.views import *
+from django.contrib.auth.decorators import login_required
+from django.contrib.auth.views import LoginView, LogoutView
 
 
 urlpatterns = [
     path('', BlogView.as_view(), name="landingpage"),
+    path('login/', LoginView.as_view(template_name="blog/login.html"), name="login"),
     path('imprint/', ImprintView.as_view(), name="imprint"),
     path('contact/', ContactView.as_view(), name="contact"),
     path('privacy/', PrivacyView.as_view(), name="privacy"),
-    path('article/create/', ArticleCreateView.as_view(), name="article-create"),
+    path('article/create/', login_required(ArticleCreateView.as_view()), name="article-create"),
     path('article/<slug>/', ArticleDetailView.as_view(), name="article-detail"),
-    path('article/<slug>/update/', ArticleUpdateView.as_view(), name="article-update"),
-    path('article/<slug>/delete/', ArticleDeleteView.as_view(), name="article-delete"),
+    path('article/<slug>/update/', login_required(ArticleUpdateView.as_view()), name="article-update"),
+    path('article/<slug>/delete/', login_required(ArticleDeleteView.as_view()), name="article-delete"),
     path('admin/', admin.site.urls),
 ]
