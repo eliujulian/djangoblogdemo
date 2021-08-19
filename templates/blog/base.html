@@ -29,6 +29,9 @@
             <div class="col">
                 <div><strong>Blog</strong></div>
                 <div><a href="{% url 'landingpage' %}">Home</a></div>
+                {% if user.is_authenticated %}
+                    <div><a href="{% url 'logout' %}">Logout</a></div>
+                {% endif %}
                  {% if user.is_superuser %}
                     <div><strong>Superuser Only</strong></div>
                      <div>
