@@ -3,13 +3,14 @@
 
 {% block content %}
 
-    <div class="container">
+    <div class="container p-1">
         {% for article in object_list %}
-            <div class="card">
-                <div class="card-head">
+            <div class="card m-2 p-1">
+                <div class="card-head p-3">
                     <a href="{% url 'article-detail' article.id_slug %}">
                         {{ article }}
                     </a>
+                    , {{ article.date|date:"d.m.Y" }}
                 </div>
             </div>
         {% endfor %}
