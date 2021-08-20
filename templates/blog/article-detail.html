@@ -22,6 +22,22 @@
             </div>
         {% endfor %}
 
+        <form action="{% url 'blog-comment-create' object.id_slug %}" method="post" class="m-2">
+                {% csrf_token %}
+            <div>
+                <label for="id_comment">Schreibe einen neuen Kommentar:</label>
+                <textarea
+                        id="id_comment"
+                        name="comment"
+                        class="form-control"
+                        rows="5"
+                ></textarea>
+            </div>
+            <div>
+                <input type="submit" class="btn btn-outline-primary mt-3" value="Comment">
+            </div>
+        </form>
+
         {% if user.is_superuser %}
             <!-- Superuser Buttons -->
             <div class="card p-4 m-3" style="border-radius: 20px">
