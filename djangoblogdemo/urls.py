@@ -32,5 +32,6 @@ urlpatterns = [
     path('article/<slug>/', ArticleDetailView.as_view(), name="article-detail"),
     path('article/<slug>/update/', login_required(ArticleUpdateView.as_view()), name="article-update"),
     path('article/<slug>/delete/', login_required(ArticleDeleteView.as_view()), name="article-delete"),
+    path('article/<slug>/new_comment/', login_required(BlogCommentCreateView.as_view()), name="blog-comment-create"),
     path('admin/', admin.site.urls),
 ]
