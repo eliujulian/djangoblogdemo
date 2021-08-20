@@ -118,6 +118,9 @@ class BlogCommentCreateView(CreateView):
 
     def form_valid(self, form):
         article = Article.objects.get(id_slug=self.kwargs['slug'])
+        form.instance.created_by = self.request.user
+        form.instance.timestamp_created = timezone.now()
+        form.instance.timestamp_changed = timezone.now()
         form.instance.article = article
         form.instance.counter = article.blogcomment_set.all().count() + 1
         return super().form_valid(form)
