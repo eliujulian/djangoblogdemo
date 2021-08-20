@@ -17,14 +17,41 @@
         <!-- Comments -->
 
         {% for comment in object.blogcomment_set.all %}
-            <div class="card p-4" style="border-radius: 20px">
+            <div class="card p-4 m-3" style="border-radius: 20px">
                 {{ comment }}
             </div>
         {% endfor %}
 
         {% if user.is_superuser %}
             <!-- Superuser Buttons -->
+            <div class="card p-4 m-3" style="border-radius: 20px">
+                <h5>Super User Info Only</h5>
 
+                <div>
+                    <div class="row">
+                        <div class="col-12 col-lg-3">Published?</div>
+                        <div class="col-12 col-lg-9">{{ object.publish }}</div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-12 col-lg-3">Created</div>
+                        <div class="col-12 col-lg-9">{{ object.timestamp_created|date:'d.m.Y' }}</div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-12 col-lg-3">Last changed</div>
+                        <div class="col-12 col-lg-9">{{ object.timestamp_changed|date:'d.m.Y' }}</div>
+                    </div>
+                </div>
+
+                <div class="btn-group btn-group-sm mt-3">
+                    <a href="{% url 'article-create' %}" class="btn btn-outline-primary">new</a>
+                    <a href="{% url 'article-list' %}" class="btn btn-outline-primary">alle beiträge</a>
+                    <a href="{% url 'article-update' object.id_slug %}" class="btn btn-outline-primary">update</a>
+                  <a href="{% url 'article-delete' object.id_slug %}" class="btn btn-outline-danger">delete</a>
+                </div>
+
+            </div>
         {% endif %}
 
     </div>
