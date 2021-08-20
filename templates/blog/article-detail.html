@@ -16,12 +16,17 @@
         </div>
 
         <!-- Comments -->
+        <div class="card p-4 m-3" style="border-radius: 20px">
+            <h5>Comments</h5>
+        </div>
+
         {% for comment in object.blogcomment_set.all %}
             <div class="card p-4 m-3" style="border-radius: 20px">
                 {{ comment }}
             </div>
         {% endfor %}
 
+    {% if user.is_authenticated %}
         <form action="{% url 'blog-comment-create' object.id_slug %}" method="post" class="m-2">
                 {% csrf_token %}
             <div>
@@ -37,6 +42,9 @@
                 <input type="submit" class="btn btn-outline-primary mt-3" value="Comment">
             </div>
         </form>
+    {% else %}
+        <div>Du must eingeloggt sein um zu kommentieren.</div>
+    {% endif %}
 
         {% if user.is_superuser %}
             <!-- Superuser Buttons -->
