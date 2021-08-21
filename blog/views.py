@@ -121,6 +121,7 @@ class BlogCommentCreateView(CreateView):
         form.instance.created_by = self.request.user
         form.instance.timestamp_created = timezone.now()
         form.instance.timestamp_changed = timezone.now()
+        form.instance.id_slug = self.model.get_id_slug(10)
         form.instance.article = article
         form.instance.counter = article.blogcomment_set.all().count() + 1
         return super().form_valid(form)
@@ -130,6 +131,7 @@ class BlogCommentUpdateView(UserPassesTestMixin, UpdateView):
     model = BlogComment
     slug_field = 'id_slug'
     form_class = BlogCommentForm
+    template_name = 'blog/comment_update.html'
 
     def test_func(self):
         # superuser can change comments for compliance purposes
