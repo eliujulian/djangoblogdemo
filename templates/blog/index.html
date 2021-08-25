@@ -7,10 +7,13 @@
         {% for article in object_list %}
             <div class="card m-2 p-1">
                 <div class="card-head p-3">
-                    <a href="{% url 'article-detail' article.id_slug %}">
+                    <a href="{% url 'article-detail' article.id_slug %}"
+                        class="h3 text-reset"
+                    >
                         {{ article }}
                     </a>
-                    , {{ article.date|date:"d.m.Y" }}
+                    , {{ article.date|date:"d.m.Y" }},
+                    by {{ article.created_by }}
                 </div>
             </div>
         {% endfor %}
