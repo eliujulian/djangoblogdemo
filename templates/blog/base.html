@@ -31,6 +31,8 @@
                 <div><a href="{% url 'landingpage' %}">Home</a></div>
                 {% if user.is_authenticated %}
                     <div><a href="{% url 'logout' %}">Logout</a></div>
+                {% else %}
+                    <div><a href="{% url 'login' %}">Login</a></div>
                 {% endif %}
                  {% if user.is_superuser %}
                     <div><strong>Superuser Only</strong></div>
