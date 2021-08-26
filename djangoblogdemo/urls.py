@@ -24,6 +24,8 @@ urlpatterns = [
     path('', BlogView.as_view(), name="landingpage"),
     path('login/', LoginView.as_view(template_name="blog/login.html"), name="login"),
     path('logout/', LogoutView.as_view(template_name="blog/login.html"), name="logout"),
+    path('register/', AccountRegisterView.as_view(), name="register"),
+    path("account/", login_required(AccountDetailView.as_view()), name="account-detail"),
     path('imprint/', ImprintView.as_view(), name="imprint"),
     path('contact/', ContactView.as_view(), name="contact"),
     path('privacy/', PrivacyView.as_view(), name="privacy"),

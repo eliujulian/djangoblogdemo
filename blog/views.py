@@ -1,9 +1,9 @@
 from django.contrib.auth.mixins import UserPassesTestMixin
 from django.utils import timezone
-from blog.models import Article, BlogComment
-from blog.forms import ArticleForm, BlogCommentForm
+from blog.forms import *
 from django.views.generic import ListView, CreateView, DetailView, DeleteView, UpdateView, TemplateView
 from django.shortcuts import get_object_or_404, reverse
+from blog.models import User
 
 
 class BlogView(ListView):
@@ -148,3 +148,17 @@ class PrivacyView(TemplateView):
 
 class ContactView(TemplateView):
     template_name = 'blog/contact.html'
+
+
+class AccountRegisterView(CreateView):
+    model = User
+    template_name = "blog/register.html"
+    form_class = AccountRegisterForm
+
+
+class AccountDetailView(DetailView):
+    model = User
+    template_name = "blog/account.html"
+
+    def get_object(self, queryset=None):
+        return self.request.user
